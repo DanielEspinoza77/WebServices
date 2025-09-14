@@ -1,7 +1,7 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require('../config/db');
 
-const Recorrido = sequelize.define("Recorrido", {
+const recorrido = sequelize.define("recorrido", {
   usuario: {
     type: DataTypes.STRING,
     allowNull: false
@@ -22,4 +22,4 @@ const Recorrido = sequelize.define("Recorrido", {
   tableName: "recorridos",
   timestamps: false
 });
-module.exports = Recorrido;
+module.exports = recorrido;

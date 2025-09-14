@@ -1,6 +1,9 @@
 const express = require('express');
+const authControllers = require('../../controllers/authControllers');
 const router = express.Router();
 require('dotenv').config();
+
+router.post('/register',authControllers.register);
 
 router.get('/test', async (req, res) => {
   try {
