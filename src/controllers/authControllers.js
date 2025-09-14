@@ -1,4 +1,4 @@
-// controllers/authControllers.js
+
 const userServices = require('../services/userServices');
 
 class AuthControllers {
@@ -12,5 +12,5 @@ class AuthControllers {
     }
 }
 
-// exportas una **instancia**
+
 module.exports = new AuthControllers();
