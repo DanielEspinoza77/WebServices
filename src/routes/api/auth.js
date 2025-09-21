@@ -1,25 +1,25 @@
 const express = require('express');
+const { body, validationResult } = require('express-validator');
 const authControllers = require('../../controllers/authControllers');
 const router = express.Router();
-require('dotenv').config();
 
-router.post('/register',authControllers.register);
-
-router.get('/test', async (req, res) => {
-  try {
-   
-    const users = [
-      { name: 'Fernando', cellphone: '33224455667', email: 'ferflo@gmail.com' }
-    ];
-
-    if (users.length === 0) {
-      return res.status(404).json({ error: 'No se encontraron usuarios' });
+router.post(
+  '/register',
+  [
+    body('name').notEmpty().withMessage('El nombre es obligatorio'),
+    body('email').isEmail().withMessage('Email inválido'),
+    body('password').notEmpty().withMessage('La contraseña es obligatoria'),
+    body('lat').optional().isFloat().withMessage('Lat debe ser un número'),
+    body('lng').optional().isFloat().withMessage('Lng debe ser un número')
+  ],
+  (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
     }
+    next();
+  },
+  authControllers.register
+);
 
-    res.status(200).json(users);
-  } catch (err) {
-    res.status(500).json({ error: 'Error interno en /test' });
-  }
-});
- 
 module.exports = router;
