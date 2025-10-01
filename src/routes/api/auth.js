@@ -21,5 +21,5 @@ router.post(
   },
   authControllers.register
 );
-
+ 
 module.exports = router;

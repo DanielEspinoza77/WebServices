@@ -1,8 +1,10 @@
 const userServices = require('../services/userServices');
- 
+const bcrypt = require('bcrypt');
+
 class AuthControllers {
   async register(req, res) {
     try {
+      
       const user = await userServices.register(req.body);
       return res.status(201).json({ message: 'Usuario registrado', user });
     } catch (error) {
